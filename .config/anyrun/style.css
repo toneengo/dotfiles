@@ -1,0 +1,28 @@
+window {
+    background-color: rgba(29,31,33,0);
+}
+
+#entry {
+    background-color: rgba(30,30,46,0);
+
+    border-radius:8px;
+    margin-bottom:-1px;
+}
+
+#main {
+    background-color: rgba(30,30,46,0.7);
+    border-radius:8px;
+    margin-top:1px;
+    box-shadow: 0px 0px 3px 3px rgba(0,0,0,0.1);
+}
+#match {
+    background-color: rgba(0,0,0,0);
+    border-radius:8;
+}
+#match:selected {
+    background-color: rgba(180,190,254,0.2);
+}
+#plugin {
+    background-color: rgba(0,0,0,0);
+}
+
