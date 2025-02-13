@@ -1,0 +1,357 @@
+@use "sass:color";
+@use "sass:string";
+@use "/usr/lib/node_modules/@catppuccin/palette/scss/_mocha.scss";
+
+$accent: mocha.$mauve;
+
+$bg: mocha.$base;
+$fg: mocha.$text;
+$radius: 7px;
+
+window.Bar {
+    border: none;
+    box-shadow: none;
+    background: linear-gradient(0deg, rgba($accent, 0.10), rgba(mocha.$base, 0.05) 48px);
+    background-color: rgba(mocha.$base, 0.4);
+    border-bottom: 1px solid rgba(mocha.$base, 0.5);
+    color: $fg;
+    font-size: 12px;
+    font-weight: 500;
+
+    button {
+        all: unset;
+        background-color: transparent;
+        border-radius: 3px;
+        border: 1px solid rgba($accent, 0.4);
+        margin: 4px 10px 4px 0px;
+        min-width: 18px;
+        padding: 0px;
+        background: linear-gradient(0deg, rgba($accent, 0.05), rgba($accent, 0.10), rgba($accent, 0.15)); 
+        box-shadow: 0px 0px 0px 1px rgba(mocha.$base, 0.40);
+
+        &:hover {
+            background: linear-gradient(0deg, rgba($accent, 0.2), rgba($accent, 0.25), rgba($accent, 0.30)); 
+        }
+
+        &:active {
+            background: linear-gradient(0deg, rgba($accent, 0.20), rgba($accent, 0.12), rgba($accent, 0.10)); 
+        }
+    }
+
+    label {
+        all: unset;
+        transition: 200ms;
+        padding: 0px 8px;
+        margin: -10px 0px;
+        //margin: 2px;
+        border-radius: $radius;
+    }
+
+    .BarCBox {
+        padding: 4px 10px 4px 10px;
+    }
+
+    .Separator {
+        all: unset;
+        color: rgba(mocha.$text, 0.50);
+        text-shadow: -1px 0px 0px rgba(mocha.$base, 0.9);
+        font-weight: lighter;
+        margin: 0px 4px;
+        margin-top: -4px;
+        font-size: 20px;
+    }
+
+    .Workspaces .focused {
+        background-color: rgba($accent, 1.0);
+        label {
+          color: rgba(mocha.$base, 1.0);
+        }
+    }
+
+    .Workspaces button label {
+        padding: 0px 1px 0px 1px;
+        font-weight: 400;
+        color: rgba($accent, 1.0);
+    }
+
+    .Focused {
+        color: rgba($accent, 1.0);
+    }
+
+    .SysTray {
+        padding: 0px 4px 0px 4px;
+        background: linear-gradient(0deg, rgba($accent, 0.1), rgba($accent, 0.2)); 
+        border-radius: 3px;
+        border: 1px solid rgba($accent, 0.4);
+
+        margin: 4px 0px 4px 8px;
+        box-shadow: 0px 0px 0px 1px rgba(mocha.$base, 0.4);
+    }
+
+    .SysTray button {
+        all: unset;
+        padding: 3px;
+        &:hover {
+            background-color: color.adjust($fg, $alpha: -0.84);
+            border-color: color.adjust($accent, $alpha: -0.8);
+        }
+
+    }
+
+    .FocusedClient {
+        color: $accent;
+    }
+
+    .Media .Cover {
+        min-height: 1.2em;
+        min-width: 1.2em;
+        border-radius: $radius;
+        background-position: center;
+        background-size: contain;
+    }
+
+    .Battery label {
+        padding-left: 0px;
+        margin-left: 4px;
+    }
+
+    .AudioSlider {
+        * {
+            all: unset;
+        }
+
+        icon {
+            margin-right: .6em;
+        }
+
+        & {
+            margin: 0em 1em;
+        }
+
+        trough {
+            background-color: color.adjust($fg, $alpha: -0.8);
+            border-radius: $radius;
+        }
+
+        highlight {
+            background-color: $accent;
+            min-height: .8em;
+            border-radius: $radius;
+        }
+
+        slider {
+            background-color: $fg;
+            border-radius: $radius;
+            min-height: 1em;
+            min-width: 1em;
+            margin: -.2em;
+        }
+    }
+}
+
+@function gtkalpha($c, $a) {
+    @return string.unquote("alpha(#{$c},#{$a})");
+}
+
+window#launcher {
+    all: unset;
+    separator {
+        margin-bottom: 0.5rem;
+        background-color: rgba(mocha.$text, 0.12);
+        box-shadow: 0px -1px 0px rgba(mocha.$base, 0.4);
+    }
+
+    box.Applauncher {
+      all:unset;
+        background: linear-gradient(180deg, rgba($accent, 0.05) 200px, rgba(mocha.$base, 0.00));
+        background-color: rgba(mocha.$base, 0.75);
+        border-radius: 0px 0px 4px 4px;
+        margin-left: 0rem;
+        padding: .8rem;
+        box-shadow: 2px 3px 8px 0 rgba(black, .3), 0px 0px 0px 1px rgba(mocha.$mantle, 1.00);
+        border-bottom: 1px solid rgba(mocha.$surface2, 0.4);
+        border-right: 1px solid rgba(mocha.$surface2, 0.4);
+        border-left: 1px solid rgba(mocha.$surface2, 0.4);
+
+        entry {
+            all: unset;
+            margin-bottom: .2rem;
+            color: rgba(mocha.$text, 0.9);
+        }
+
+        button {
+          all: unset;
+            background-color: transparent;
+            background: linear-gradient(0deg, rgba($accent, 0.18), rgba($accent, 0.19)); 
+            border: 1px solid rgba($accent, 0.4);
+            border-radius:2px;
+            box-shadow: 0px 0px 0px 1px rgba(mocha.$base, 0.40);
+            min-width: 0;
+            min-height: 0;
+            padding: .4rem;
+            color: gtkalpha($accent, 1.0);
+
+            icon {
+                font-size: 1.5em;
+                margin-right: 0.5rem;
+            }
+
+            label.name {
+                font-weight: 500;
+                font-size: 0.9em
+            }
+
+            label.description {
+                font-weight: 300;
+                font-size: 0.8em;
+                color: gtkalpha($fg, 1.0);
+            }
+            &:hover {
+                background: linear-gradient(0deg, rgba($accent, 0.27), rgba($accent, 0.30)); 
+            }
+
+            &:active {
+                background: linear-gradient(0deg, rgba($accent, 0.20), rgba($accent, 0.12), rgba($accent, 0.10)); 
+            }
+        }
+
+        box.not-found {
+            padding: 1rem;
+
+            icon {
+                font-size: 6em;
+                color: gtkalpha($fg, .7);
+            }
+
+            label {
+                color: gtkalpha($fg, .9);
+                font-size: 1.2em;
+            }
+        }
+    }
+}
+
+// https://gitlab.gnome.org/GNOME/gtk/-/blob/gtk-3-24/gtk/theme/Adwaita/_colors-public.scss
+$error: mocha.$red;
+
+window.NotificationPopups {
+    all: unset;
+}
+
+eventbox.Notification {
+
+    &:first-child>box {
+        margin-top: 1rem;
+    }
+
+    &:last-child>box {
+        margin-bottom: 1rem;
+    }
+
+    // eventboxes can not take margins so we style its inner box instead
+    >box {
+        background: linear-gradient(180deg, rgba(mocha.$base, 0.50), rgba(mocha.$base, 0.53));
+        background-color: rgba($accent, 0.4);
+        box-shadow: 2px 3px 8px 0 rgba(black, .3), 0px 0px 0px 1px rgba(mocha.$base, 1.00);
+        border: 1px solid rgba($accent, 0.7);
+        font-size: 12px;
+
+        min-width: 300px;
+        border-radius: 3px;
+        margin: 0.2rem 1.0rem 0.2rem 1.0rem;
+    }
+
+    &.critical>box {
+        border: 1px solid gtkalpha($error, .4);
+
+        .header {
+
+            .app-name {
+                color: gtkalpha($error, .8);
+
+            }
+
+            .app-icon {
+                color: gtkalpha($error, .6);
+            }
+        }
+    }
+
+    .header {
+        margin: 0.3rem;
+        color: gtkalpha($accent, 1.0);
+
+        .app-icon {
+            margin: 0 .4rem;
+        }
+
+        .app-name {
+            margin-right: .3rem;
+            font-weight: 500;
+            margin-left: 1px;
+
+            
+            //&:first-child {
+            //    margin-left: .0rem;
+            //}
+        }
+
+        .time {
+            margin: 0 .4rem;
+        }
+
+        button {
+            padding: .2rem;
+            border-radius: 2px;
+            min-width: 0;
+            min-height: 0;
+        }
+    }
+
+    separator {
+        margin: 0 .3rem;
+        background-color: rgba(mocha.$text, 0.20);
+        box-shadow: 0px -1px 0px rgba(mocha.$base, 0.3);
+    }
+
+    .content {
+        margin: 0.3rem;
+
+        .summary {
+            margin-top: -0.1rem;
+            margin-left: 1px;
+            color: gtkalpha($fg, 1.0);
+        }
+
+        .body {
+            color: gtkalpha($fg, 1.0);
+        }
+
+        .image {
+            border: 1px solid gtkalpha($accent, 1.0);
+            margin-right: .5rem;
+            border-radius: 3px;
+            min-width: 80px;
+            min-height: 80px;
+            background-size: cover;
+            background-position: center;
+        }
+    }
+
+    .actions {
+        margin: 1rem;
+        margin-top: 0;
+
+        button {
+            margin: 0 .3rem;
+
+            &:first-child {
+                margin-left: 0;
+            }
+
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+    }
+}

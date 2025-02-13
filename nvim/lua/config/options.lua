@@ -1,0 +1,13 @@
+vim.o.scrolloff = 8
+vim.o.inccommand = 'nosplit'
+vim.o.showmatch = true
+vim.o.ignorecase = true
+vim.o.smartcase = true
+vim.o.tabstop = 4
+vim.o.shiftwidth = 4
+vim.o.expandtab = true
+--vim.o.cindent = true
+vim.o.number = true
+vim.o.guifont = 'MonaspiceXe Nerd Font Mono:h10'
+vim.o.updatetime = 100
+vim.o.termguicolors = true 
