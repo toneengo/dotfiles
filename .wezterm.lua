@@ -8,7 +8,7 @@ local config = wezterm.config_builder()
 
 -- For example, changing the color scheme:
 config.color_scheme = 'Catppuccin Mocha'
-config.window_background_opacity = 0.9
+config.window_background_opacity = 0.90
 
 -- and finally, return the configuration to wezterm
 config.enable_wayland = true
@@ -18,21 +18,36 @@ config.enable_tab_bar = false
 config.font_size = 11.0
 
 config.font = wezterm.font 'MonaspiceXe Nerd Font Mono'
+config.font_rules = {
+  {
+    intensity = 'Bold',
+    italic = true,
+    font = wezterm.font {
+      family = 'MonaspiceRn Nerd Font Mono',
+      weight = 'Bold',
+      style = 'Italic',
+    },
+  },
+  {
+    italic = true,
+    intensity = 'Half',
+    font = wezterm.font {
+      family = 'MonaspiceRn Nerd Font Mono',
+      weight = 'DemiBold',
+      style = 'Italic',
+    },
+  },
+  {
+    italic = true,
+    intensity = 'Normal',
+    font = wezterm.font {
+      family = 'MonaspiceRn Nerd Font Mono',
+      style = 'Italic',
+    },
+  },
+}
 
-wezterm.on('format-window-title', function(tab, pane, tabs, panes, config)
-
-  local zoomed = ''
-  if tab.active_pane.is_zoomed then
-    zoomed = '[Z] '
-  end
-
-  local index = ''
-  if #tabs > 1 then
-    index = string.format('[%d/%d] ', tab.tab_index + 1, #tabs)
-  end
-
-  return wezterm.truncate_right(tab.active_pane.title, 100)
-end)
+--config.disable_default_key_bindings = true
 
 wezterm.gui.get_appearance()
 
