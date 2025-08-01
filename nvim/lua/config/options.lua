@@ -11,3 +11,9 @@ vim.o.number = true
 vim.o.guifont = 'MonaspiceXe Nerd Font Mono:h10'
 vim.o.updatetime = 100
 vim.o.termguicolors = true 
+
+--vim.cmd([[highlight Folded guibg=#313244]])
+--vim.wo.foldmethod = 'expr'
+--vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+--vim.wo.foldtext = 'v:lua.vim.treesitter.foldtext()'
+--vim.wo.foldlevel = 99

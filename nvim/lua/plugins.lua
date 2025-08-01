@@ -1,46 +1,10 @@
 return {
-    --[[
-    {
-        "karb94/neoscroll.nvim",
-        config = function ()
-            require('config.neoscroll')
-        end,
-    },
-    ]]
-    {
-        "kmonad/kmonad-vim"
-    },
     {
         "nvim-pack/nvim-spectre",
         dependencies = { 'nvim-lua/plenary.nvim', },
         config = function ()
             require('config.spectre');
         end,
-    },
-    {
-        "declancm/cinnamon.nvim",
-        version = "*",
-        config = function ()
-            require('config.cinnamon');
-        end,
-    },
-    {
-        "christoomey/vim-tmux-navigator",
-        lazy = false,
-        md = {
-            "TmuxNavigateLeft",
-            "TmuxNavigateDown",
-            "TmuxNavigateUp",
-            "TmuxNavigateRight",
-            "TmuxNavigatePrevious",
-        },
-        keys = {
-            { "<c-h>", "<cmd><C-U>TmuxNavigateLeft<cr>" },
-            { "<c-j>", "<cmd><C-U>TmuxNavigateDown<cr>" },
-            { "<c-k>", "<cmd><C-U>TmuxNavigateUp<cr>" },
-            { "<c-l>", "<cmd><C-U>TmuxNavigateRight<cr>" },
-            { "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
-        },
     },
     {
         'nvim-tree/nvim-web-devicons'
@@ -69,15 +33,6 @@ return {
         'nvim-lua/plenary.nvim',
     },
     {
-        'nvim-neo-tree/neo-tree.nvim',
-        config = function()
-            require 'config.neotree'
-        end,
-    },
-    {
-        'MunifTanjim/nui.nvim',
-    },
-    {
         'BurntSushi/ripgrep',
     },
     {
@@ -96,22 +51,13 @@ return {
             'nvim-telescope/telescope-ui-select.nvim',
             {
                 'nvim-telescope/telescope-fzf-native.nvim',
-                 build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release'
+                 build = 'make'
             },
             'debugloop/telescope-undo.nvim',
         },
         config = function()
             require 'config.telescope'
         end,
-    },
-    {
-        'akinsho/toggleterm.nvim',
-        version = '*',
-        opts = { open_mapping = [[<c-\>]], direction = 'float' },
-        keys = [[<c-\>]],
-    },
-    {
-        'Civitasv/cmake-tools.nvim',
     },
     {
         'stevearc/aerial.nvim',
@@ -124,99 +70,68 @@ return {
         },
         cmd = { 'AerialOpen', 'AerialToggle' },
     },
+    {
+      'saghen/blink.cmp',
+      -- optional: provides snippets for the snippet source
+      dependencies = { 'rafamadriz/friendly-snippets' },
 
-    --[[
-    {
-        "folke/noice.nvim",
-        event = "VeryLazy",
-        opts = {
-          -- add any options here
+      -- use a release tag to download pre-built binaries
+      version = '1.*',
+      -- AND/OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
+      -- build = 'cargo build --release',
+      -- If you use nix, you can build from source using latest nightly rust with:
+      -- build = 'nix run .#build-plugin',
+
+      ---@module 'blink.cmp'
+      ---@type blink.cmp.Config
+      opts = {
+        -- 'default' (recommended) for mappings similar to built-in completions (C-y to accept)
+        -- 'super-tab' for mappings similar to vscode (tab to accept)
+        -- 'enter' for enter to accept
+        -- 'none' for no mappings
+        --
+        -- All presets have the following mappings:
+        -- C-space: Open menu or open docs if already open
+        -- C-n/C-p or Up/Down: Select next/previous item
+        -- C-e: Hide menu
+        -- C-k: Toggle signature help (if signature.enabled = true)
+        --
+        -- See :h blink-cmp-config-keymap for defining your own keymap
+        keymap = { preset = 'enter' },
+
+        appearance = {
+          -- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
+          -- Adjusts spacing to ensure icons are aligned
+          nerd_font_variant = 'mono'
         },
-        dependencies = {
-          -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-          "MunifTanjim/nui.nvim",
-          -- OPTIONAL:
-          --   `nvim-notify` is only needed, if you want to use the notification view.
-          --   If not available, we use `mini` as the fallback
-          -- {
-          --     "rcarriga/nvim-notify",
-          --     config = function()
-          --         require("notify").setup({
-          --             background_colour = "#181825"
-          --         })
-          --     end,
-          --  },
+
+        -- (Default) Only show the documentation popup when manually triggered
+        completion = { documentation = { auto_show = false } },
+
+        -- Default list of enabled providers defined so that you can extend it
+        -- elsewhere in your config, without redefining it, due to `opts_extend`
+        sources = {
+          default = { 'lsp', 'path', 'snippets', 'buffer' },
         },
-        config = function()
-            require 'config.noice'
-        end,
+
+        -- (Default) Rust fuzzy matcher for typo resistance and significantly better performance
+        -- You may use a lua implementation instead by using `implementation = "lua"` or fallback to the lua implementation,
+        -- when the Rust fuzzy matcher is not available, by using `implementation = "prefer_rust"`
+        --
+        -- See the fuzzy documentation for more information
+        fuzzy = { implementation = "prefer_rust_with_warning" }
+      },
+      opts_extend = { "sources.default" }
     },
-    {
-        'folke/lazydev.nvim',
-        ft = "lua",
-        opts = {
-            library = {
-                "luvit-meta/library",
-            },
-        },
-        config = function()
-            require 'config.lazydev'
-        end,
-    },
-    {
-        'elkowar/yuck.vim',
-    },
-    
-    --]]
     {
         'neovim/nvim-lspconfig',
         lazy = false,
+
         dependencies = {
-            -- main one
-            { "ms-jpq/coq_nvim", branch = "coq" },
-
-            -- 9000+ Snippets
-            { "ms-jpq/coq.artifacts", branch = "artifacts" },
-
-            -- lua & third party sources -- See https://github.com/ms-jpq/coq.thirdparty
-            -- Need to **configure separately**
-            { 'ms-jpq/coq.thirdparty', branch = "3p" }
-            -- - shell repl
-            -- - nvim lua api
-            -- - scientific calculator
-            -- - comment banner
-            -- - etc
         },
-
-        init = function()
-            vim.g.coq_settings = {
-                auto_start = true,
-            }
-        end,
 
         config = function()
             require 'config.lsp'
         end,
-    },
-    --[[
-    {
-        'hrsh7th/nvim-cmp',
-        dependencies = {
-          'hrsh7th/cmp-buffer',
-          'hrsh7th/cmp-nvim-lsp',
-          'hrsh7th/cmp-nvim-lsp-signature-help',
-          'hrsh7th/cmp-path',
-          'hrsh7th/cmp-nvim-lua',
-          'lukas-reineke/cmp-under-comparator',
-          'hrsh7th/cmp-cmdline',
-          'hrsh7th/cmp-nvim-lsp-document-symbol',
-          'hrsh7th/cmp-vsnip',
-          'hrsh7th/vim-vsnip',
-        },
-        init = function()
-          require 'config.cmp'
-        end,
-        event = 'InsertEnter',
-    },
-    --]]
+    }
 }

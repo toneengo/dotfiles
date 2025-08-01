@@ -1,0 +1,2 @@
+require('mini.animate').setup{
+}

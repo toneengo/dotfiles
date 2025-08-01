@@ -25,11 +25,8 @@ map('n', '<C-S-p>', ':Telescope commands<CR>', silent)
 map('n', '<C-S-a>', ':Telescope aerial<CR>', silent)
 map('n', '<Leader>j', ':Telescope jumplist<CR>', silent)
 map('n', '<Leader>r', ':Telescope lsp_references<CR>', silent)
-map('n', '<Leader>e', ':Telescope file_browser<CR>', silent)
 
-telescope.load_extension 'file_browser'
 telescope.load_extension 'undo'
 telescope.load_extension 'ui-select'
-telescope.load_extension 'cmake_tools'
 --telescope.load_extension 'noice'
 telescope.load_extension 'aerial'
